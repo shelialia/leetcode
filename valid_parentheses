@@ -1,0 +1,37 @@
+class Solution(object):
+    # a function that returns a Boolean expression, so its either True or False
+    # input is s
+    def isValid(self, s):
+        """
+        :type s: str
+        :rtype: bool
+        """
+
+        # if the length of the list is not even, return False as it is definitely wrong
+        if (len(s)) % 2 != 0:
+            return False
+        
+        # create a dictionary to store the key value pairs
+        dict = {'(': ')', '{': '}', '[': ']'}
+        # create an empty list
+        stack = []
+        
+        for i in s:
+            # use .keys() function to check if character is present in any keys of the dictionary, ie. the character must be an open bracket
+            if i in dict.keys():
+                stack.append(i)
+            
+            # if the character is a close bracket
+            else: 
+                 # assign variable a to the left most value in the stack ie. an open bracket    
+                if stack == []:
+                    return False
+                a = stack.pop()
+
+                # if the value pair of key a and the current close bracket character are not the same, return False
+                if i != dict[a]:
+                    return False
+        if stack == []:
+            return True
+
+        return False
